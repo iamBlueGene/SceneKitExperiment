@@ -40,44 +40,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    SCNScene *scene = [[SCNScene alloc] init];
-    
-    SCNNode*ambientLightNode = [SCNNode node];
-    ambientLightNode.light = [SCNLight light];
-    ambientLightNode.light.type = SCNLightTypeAmbient;
-    ambientLightNode.light.color = [UIColor colorWithRed:0.5 green:0.3 blue:0.8 alpha:1.0];
-    
-    SCNNode *omniLightNode = [SCNNode node];
-    omniLightNode.light = [SCNLight light];
-    omniLightNode.light.type = SCNLightTypeOmni;
-    omniLightNode.light.color = [UIColor colorWithWhite:0.75 alpha:1.0];
-    omniLightNode.position = SCNVector3Make(0, 50, 50);
-    
-    SCNNode *omniLightNode2 = [SCNNode node];
-    omniLightNode2.light = [SCNLight light];
-    omniLightNode2.light.type = SCNLightTypeOmni;
-    omniLightNode2.light.color = [UIColor colorWithWhite:0.75 alpha:1.0];
-    omniLightNode2.position = SCNVector3Make(0, -50, -50);
-    
-    
-    
-//    SCNBox *box = [SCNBox boxWithWidth:10.0 height:10.0 length:10.0 chamferRadius:1.0];
-//    SCNNode *boxNode = [SCNNode nodeWithGeometry:box];
-//    [scene.rootNode addChildNode:boxNode];
-    
 
-    
-//    SCNPlane *plane = [SCNPlane planeWithWidth:50.0 height:50.0];
-//    SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
-//    planeNode.eulerAngles = SCNVector3Make(GLKMathDegreesToRadians(-90), 0, 0);
-//    planeNode.position = SCNVector3Make(0, -0.5, 0);
-//    
-//    
-//    SCNNode *cameraNode = [SCNNode node];
-//    cameraNode.camera = [SCNCamera camera];
-//    cameraNode.position = SCNVector3Make(169, -60, -160);
-//    cameraNode.scale = SCNVector3Make(-1, -164, -1);
 
     
     SCNScene *characterScene = [SCNScene sceneNamed:@"character-male-muscle.dae"];
@@ -97,8 +60,13 @@
     
     SCNMaterial *mat1 = [SCNMaterial material];
     mat1.diffuse.contents = [UIColor redColor];
-//    
-//    [[[[man.childNodes[0] childNodes] objectAtIndex:0] geometry] materials] = @[material];
+    
+    
+    
+    //If running on simulator - the Man node has child nodes with geometry
+    //If running on device - the Man node doesnt have child nodes, and the man node itself has geometry
+    
+
     
 //    man.childNodes[0].childNodes[0].geometry.materials = @[mat1];
 //    man.childNodes[0].childNodes[1].geometry.materials = @[material];
@@ -118,22 +86,6 @@
     
     self.geometryNodes = man.childNodes[0].childNodes;
 //    man.geometry.materials = @[material];
-    
-    
-//    SCNLookAtConstraint *constraint = [SCNLookAtConstraint lookAtConstraintWithTarget:man];
-//    constraint.gimbalLockEnabled = YES;
-//    cameraNode.constraints = @[constraint];
-//////
-//
-    
-//    
-//    [scene.rootNode addChildNode:ambientLightNode];
-//    [scene.rootNode addChildNode:omniLightNode];
-//    [scene.rootNode addChildNode:omniLightNode2];
-//    [scene.rootNode addChildNode:cameraNode];
-//    [scene.rootNode addChildNode:planeNode];
-//    [scene.rootNode addChildNode:man];
-
 
     
     
@@ -166,9 +118,7 @@
     
     CGFloat newAngle = translation.x * M_PI / 180.0;
     newAngle += self.currentAngle;
-    
-//    CGFloat yAngle = translation.y * M_PI / 180.0;
-//    yAngle += self.currentYAngle;
+
     
     
 
